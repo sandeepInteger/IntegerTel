@@ -1,0 +1,172 @@
+import { motion, type Variants, type Transition } from "framer-motion";
+
+const spring: Transition = { duration: 0.6, ease: "easeOut" };
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: spring },
+};
+
+const popIn: Variants = {
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: "easeOut" } },
+};
+
+const stagger = (s = 0.1): Variants => ({
+  hidden: {},
+  visible: { transition: { staggerChildren: s } },
+});
+
+// ── Data ──────────────────────────────────────────────────────────
+const metrics = [
+  {
+    label: "Tier-1 & Regional Operators",
+    description: "Large-scale carrier deployments across fiber, 4G, and 5G networks in major US metros.",
+    bg: "bg-[#f0f5c8]",
+    iconBg: "bg-[#e2ee9a] text-[#5a7300]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M2 20 L5.5 6 M22 20 L18.5 6 M5.5 6 Q12 14 18.5 6 M8 13 Q12 18 16 13" />
+      </svg>
+    ),
+  },
+  {
+    label: "OEMs & Hardware Vendors",
+    description: "Device integration, lab testing, and field validation for leading hardware manufacturers.",
+    bg: "bg-white border border-slate-200",
+    iconBg: "bg-slate-100 text-slate-500",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <rect x="7" y="7" width="10" height="10" rx="1.5" />
+        <path d="M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3" />
+      </svg>
+    ),
+  },
+  {
+    label: "Neutral Host Operators",
+    description: "DAS, small cell, and shared infrastructure for stadiums, campuses, and transit hubs.",
+    bg: "bg-[#dbeafe]",
+    iconBg: "bg-blue-100 text-blue-600",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" />
+      </svg>
+    ),
+  },
+  {
+    label: "Fiber Network Operators",
+    description: "End-to-end fiber splicing, testing, and commissioning for backbone and last-mile connectivity.",
+    bg: "bg-[#f1f5f9]",
+    iconBg: "bg-slate-200 text-slate-600",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M3 12h4l3-9 4 18 3-9h4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Enterprises & Venues",
+    description: "Private LTE, in-building wireless, and data center cabling for enterprise environments.",
+    bg: "bg-[#fce7f3]",
+    iconBg: "bg-pink-100 text-pink-500",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M3 21h18M9 21V7l7-4v18M9 7H5v14M13 11h2M13 15h2" />
+      </svg>
+    ),
+  },
+  {
+    label: "Silicon Developers",
+    description: "Chipset evaluation, protocol testing, and device certification support for R&D teams.",
+    bg: "bg-[#dcfce7]",
+    iconBg: "bg-emerald-100 text-emerald-600",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+      </svg>
+    ),
+  },
+];
+
+// ── Single card ───────────────────────────────────────────────────
+const MetricCard = ({ label, description, bg, iconBg, icon }: (typeof metrics)[0]) => (
+  <motion.div
+    variants={popIn}
+    className={`${bg} rounded-2xl p-6 flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-200`}
+  >
+    {/* Icon */}
+    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${iconBg}`}>
+      {icon}
+    </div>
+
+    {/* Text */}
+    <div className="flex flex-col gap-1.5">
+      <p className="text-sm font-extrabold text-slate-900 leading-snug">{label}</p>
+      <p className="text-xs text-slate-500 leading-relaxed">{description}</p>
+    </div>
+
+    {/* Arrow */}
+    <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-slate-400 group-hover:text-blue-500 transition-colors duration-200">
+      Learn more
+      <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  </motion.div>
+);
+
+// ── Section ───────────────────────────────────────────────────────
+const EfficiencyMetrics = () => (
+  <section className="w-full bg-white py-20 px-6 overflow-hidden">
+    <div className="max-w-6xl mx-auto">
+
+      {/* Header */}
+      <motion.div
+        className="flex flex-col items-center text-center gap-4 mb-14"
+        variants={stagger(0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.span
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          Our Clients
+        </motion.span>
+
+        <motion.h2
+          variants={fadeUp}
+          className="text-5xl sm:text-6xl font-extrabold text-slate-900 tracking-tight"
+        >
+          Who We Serve
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUp}
+          className="text-gray-400 text-base sm:text-lg max-w-lg"
+        >
+          Empowering the world's leading technology and connectivity providers
+        </motion.p>
+      </motion.div>
+
+      {/* Cards */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        variants={stagger(0.08)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {metrics.map((m) => (
+          <MetricCard key={m.label} {...m} />
+        ))}
+      </motion.div>
+
+    </div>
+  </section>
+);
+
+export default EfficiencyMetrics;

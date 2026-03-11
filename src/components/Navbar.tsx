@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 sm:h-[70px]">
 
             {/* ── Logo ── */}
-            <a href="#" className="flex items-center gap-2.5 shrink-0">
+            <Link to="#" className="flex items-center gap-2.5 shrink-0">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-md shadow-blue-500/20">
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-white">
                   <path
@@ -74,7 +74,7 @@ const Navbar = () => {
                   Services Inc.
                 </span>
               </div>
-            </a>
+            </Link>
 
             {/* ── Desktop links ── */}
             <div className="hidden lg:flex items-center gap-1">
@@ -108,48 +108,48 @@ const Navbar = () => {
                           className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden py-2"
                         >
                           {link.dropdown.map((item) => (
-                            <a
+                            <Link
                               key={item.label}
-                              href={item.href}
+                              to={item.href}
                               className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-150"
                             >
                               <span className="text-base">{item.icon}</span>
                               {item.label}
-                            </a>
+                            </Link>
                           ))}
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <a
+                  <Link
                     key={link.label}
-                    href={link.href}
+                    to={link.href}
                     className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-150"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               )}
             </div>
 
             {/* ── Desktop CTA ── */}
             <div className="hidden lg:flex items-center gap-3">
-              <a
-                href="tel:+1234567890"
+              <Link
+                to="tel:+1234567890"
                 className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-600 transition-colors duration-150 font-medium"
               >
                 <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
                 </svg>
                 +1 (972) 539-4100  
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                to="#contact"
                 className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-400/30 active:scale-95 transition-all duration-200"
               >
                 Get a Quote
-              </a>
+              </Link>
             </div>
 
             {/* ── Mobile hamburger ── */}
@@ -224,28 +224,28 @@ const Navbar = () => {
 
               {/* Links */}
               <div className="flex-1 overflow-y-auto py-4 px-3">
-                {navLinks.map((link, i) => (
+                {navLinks.map((link) => (
                   <div key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       onClick={() => !link.dropdown && setMobileOpen(false)}
                       className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-150"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                     {/* Mobile sub-links */}
                     {link.dropdown && (
                       <div className="ml-4 mt-1 mb-2 flex flex-col gap-0.5 border-l-2 border-blue-100 pl-3">
                         {link.dropdown.map((item) => (
-                          <a
+                          <Link
                             key={item.label}
-                            href={item.href}
+                            to={item.href}
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center gap-2 py-2 text-xs text-slate-500 hover:text-blue-600 transition-colors"
                           >
                             <span>{item.icon}</span>
                             {item.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -255,22 +255,22 @@ const Navbar = () => {
 
               {/* Drawer footer CTA */}
               <div className="px-5 py-5 border-t border-slate-100 flex flex-col gap-3">
-                <a
-                  href="tel:+1234567890"
+                <Link
+                  to="tel:+1234567890"
                   className="flex items-center justify-center gap-2 text-sm text-slate-500 font-medium py-2.5 rounded-xl border border-slate-200 hover:border-blue-200 hover:text-blue-600 transition-colors"
                 >
                   <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
                   </svg>
                   Call Us
-                </a>
-                <a
-                  href="#contact"
+                </Link>
+                <Link
+                  to="#contact"
                   onClick={() => setMobileOpen(false)}
                   className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3 rounded-full text-center shadow-md shadow-blue-500/20 active:scale-95 transition-all duration-200"
                 >
                   Get a Quote
-                </a>
+                </Link>
               </div>
             </motion.div>
           </>

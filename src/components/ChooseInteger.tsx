@@ -1,6 +1,6 @@
 import { motion, type Variants, type Transition } from "framer-motion";
 import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
-import { useState } from "react";
+
 import CarouselSection from "./CorouselSection";
 
 const spring: Transition = { duration: 0.6, ease: "easeOut" };
@@ -49,12 +49,7 @@ const BrainIcon = () => (
   </svg>
 );
 
-const ClockIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-blue-500">
-    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-    <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+
 
 // ── Card data ─────────────────────────────────────────────────────
 const cards = [
@@ -89,35 +84,11 @@ const cards = [
   
 ];
 
-// ── Carousel card ─────────────────────────────────────────────────
-const FeatureCard = ({ icon, title, subtitle, description }: (typeof cards)[0]) => (
-  <div className="min-w-[320px] sm:min-w-[360px] flex-shrink-0 bg-white/70 backdrop-blur-sm border border-blue-100 rounded-3xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-    {/* Icon box */}
-    <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
-      {icon}
-    </div>
 
-    {/* Title */}
-    <h3 className="text-xl font-extrabold text-slate-900 leading-tight tracking-tight">
-      {title}
-    </h3>
-
-    {/* Subtitle */}
-    <p className="text-blue-500 text-sm font-semibold">{subtitle}</p>
-
-    {/* Description */}
-    <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
-  </div>
-);
 
 // ── Main component ────────────────────────────────────────────────
 const ChooseInteger = () => {
-  const [index, setIndex] = useState(0);
-  const visibleCount = 3;
-  const maxIndex = cards.length - visibleCount;
-
-  const prev = () => setIndex((i) => Math.max(0, i - 1));
-  const next = () => setIndex((i) => Math.min(maxIndex, i + 1));
+  
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-blue-200 via-white to-white">

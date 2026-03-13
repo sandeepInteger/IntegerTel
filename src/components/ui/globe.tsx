@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import createGlobe, { type COBEOptions } from "cobe"
-import { useMotionValue, useSpring, motion, AnimatePresence } from "motion/react"
+import { useMotionValue, useSpring, motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400

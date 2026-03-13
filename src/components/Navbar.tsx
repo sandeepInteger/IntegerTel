@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink,  useLocation } from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ── Route map ────────────────────────────────────────────────────
@@ -70,10 +71,10 @@ const mainLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled]               = useState(false);
   const [mobileOpen, setMobileOpen]           = useState(false);
-  const [dropdownOpen, setDropdownOpen]       = useState(false);
+  //const [dropdownOpen, setDropdownOpen]       = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const location = useLocation();
 
   const isServicesActive =
@@ -95,14 +96,14 @@ const Navbar = () => {
   // Close everything on route change
   useEffect(() => {
     setMobileOpen(false);
-    setDropdownOpen(false);
+    {/**setDropdownOpen(false); */}
   }, [location.pathname]);
 
-  const handleServiceNav = (href: string) => {
+  {/**const handleServiceNav = (href: string) => {
     setDropdownOpen(false);
     setMobileOpen(false);
     navigate(href);
-  };
+  }; */}
 
   return (
     <>

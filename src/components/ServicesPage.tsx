@@ -252,7 +252,7 @@ const ServicesPage = () => {
 
             {/* Stats row */}
             <motion.div variants={fadeUp} className="flex items-center gap-10 pt-2">
-              {stats.map(({ value, label }, i) => (
+              {stats.map(({ value, label }) => (
                 <div key={label} className="flex flex-col gap-1">
                   <span className="text-3xl sm:text-4xl font-extrabold text-white leading-none">{value}</span>
                   <span className="text-slate-500 text-xs font-medium tracking-wide">{label}</span>

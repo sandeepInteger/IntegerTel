@@ -16,13 +16,7 @@ const fadeIn = (delay = 0) => ({
   transition: { duration: 0.6, delay },
 })
 
-/* ── Stats data ──────────────────────────────────────────────────────────── */
-const STATS = [
-  { value: "30+",  label: "U.S. States"       },
-  { value: "600+", label: "Field Experts"      },
-  { value: "5",    label: "Service Verticals"  },
-  { value: "15+",  label: "Years of Expertise" },
-]
+
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 const Hero = () => {

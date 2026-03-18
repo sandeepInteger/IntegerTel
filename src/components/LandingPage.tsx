@@ -7,6 +7,7 @@ import Banner from "./Banner";
 import VisionMission from "./VisionMission";
 import Stats from "./Stats";
 
+
 //import WorldMapHQ from "./ui/WorldMapHQ";
 const LandingPage = ()=>
 {
@@ -14,6 +15,7 @@ const LandingPage = ()=>
         <>
       <Hero/>
       <Stats/>
+      
 
       <WhoWeAre/>
       <VisionMission/>

@@ -5,9 +5,10 @@ import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
 import ContactPage from "./components/ContactPage";
 import ServicesPage from "./components/ServicesPage";
-{/**
+
 import WirelessServicesPage from "./components/WirelessPage";
 import FiberEngineeringPage from "./components/FiberEngineeringPage";
+{/**
 import DataCenterPage from "./components/DataCenterPage";
 import DroneTowerAuditPage from "./components/DroneTowerAuditPage";
 import ChipsetTestingPage from "./components/chipsetPage";
@@ -23,10 +24,12 @@ export function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactPage/>}/>
         <Route path="/services" element={<ServicesPage/>}/>
-        {/**
-        <Route path="/about" element={<AboutPage />} />
+        
+        
         <Route path="/wirelessPage" element={<WirelessServicesPage/>}/>
         <Route path="/fiberPage" element={<FiberEngineeringPage/>}/>
+        {/**
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/dataCenterPage" element={<DataCenterPage/>}/>
         <Route path="/droneTowerPage" element={<DroneTowerAuditPage/>}/>
         <Route path="/chipsetPage" element={<ChipsetTestingPage/>}/> 

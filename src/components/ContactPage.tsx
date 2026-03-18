@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion";
 //import WorldMap from "./ui/world-map";
-import WorldMap from "./ui/WorldMap";
+//import WorldMap from "./ui/WorldMap";
 
 const spring: Transition = { duration: 0.6, ease: "easeOut" };
 const fadeUp: Variants = {
@@ -205,7 +205,7 @@ const ContactPage = () => {
               <div className="relative w-full rounded-2xl overflow-hidden bg-[#f0f6ff]">
                 <div className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
                   style={{ background: `radial-gradient(ellipse at center, transparent 40%, #f0f6ff 78%)` }} />
-                <WorldMap
+                {/**<WorldMap
                   dots={mapDots}
                   lineColor="#3b82f6"
                   backgroundColor="#f0f6ff"
@@ -213,7 +213,7 @@ const ContactPage = () => {
                   offices={offices.map(({ city, country, flag, lat, lng }) => ({
                     city, country, flag, lat, lng,
                   }))}
-                />
+                /> */}
               </div>
 
               {/* Office cards */}

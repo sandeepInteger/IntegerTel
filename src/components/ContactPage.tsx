@@ -54,10 +54,10 @@ const offices = [
   },
 ];
 
-const mapDots = offices.slice(1).map((o) => ({
+{/**const mapDots = offices.slice(1).map((o) => ({
   start: { lat: offices[0].lat, lng: offices[0].lng },
   end:   { lat: o.lat,          lng: o.lng          },
-}));
+})); */}
 
 const services = [
   "Wireless Engineering & Field Services",

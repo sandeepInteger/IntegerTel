@@ -136,9 +136,7 @@ const CTABanner = () => {
       { start: { lat: 28.6139,  lng: 77.209    }, end: { lat: 43.1332,  lng: 131.9113  } },
       { start: { lat: 28.6139,  lng: 77.209    }, end: { lat: -1.2921,  lng: 36.8219   } },
     ]}
-    lineColor="#3b82f6"
-    backgroundColor="#0f172a"   // ✅ matches slate-900 card background
-    dotColor="#FFFFFF18"         // ✅ very subtle white dots on dark bg
+    
                         />
                     </div>
                 </div>

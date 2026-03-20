@@ -300,7 +300,7 @@ const FiberEngineeringPage = () => {
 
                   <a href="#contact"
                     className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r ${current.color} px-5 py-3 rounded-xl shadow-md hover:opacity-90 active:scale-95 transition-all duration-200`}>
-                    Request this Service
+                    Find Out More
                     <ArrowIcon />
                   </a>
                 </div>
@@ -413,7 +413,7 @@ const FiberEngineeringPage = () => {
               </a>
               <a href="#contact"
                 className="text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 px-6 py-2.5 rounded-full shadow-md shadow-indigo-500/20 hover:shadow-indigo-400/30 transition-all duration-200 flex items-center gap-2">
-                Request a Proposal
+                Find Out More
                 <ArrowIcon />
               </a>
             </div>

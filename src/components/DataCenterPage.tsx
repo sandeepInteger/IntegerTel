@@ -290,7 +290,7 @@ const DataCenterPage = () => {
 
                   <a href="#contact"
                     className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r ${current.color} px-5 py-3 rounded-xl shadow-md hover:opacity-90 active:scale-95 transition-all duration-200`}>
-                    Request this Service
+                    Find Out More
                     <ArrowIcon />
                   </a>
                 </div>

@@ -362,7 +362,7 @@ const WirelessServicesPage = () => {
                   {/* CTA */}
                   <a href="#contact"
                     className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r ${current.color} px-5 py-3 rounded-xl shadow-md hover:opacity-90 active:scale-95 transition-all duration-200`}>
-                    Request this Service
+                    Find Out More
                     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                       <path d="M4 10h12M10 4l6 6-6 6" />
                     </svg>

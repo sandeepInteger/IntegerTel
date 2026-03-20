@@ -10,8 +10,9 @@ import WirelessServicesPage from "./components/WirelessPage";
 import FiberEngineeringPage from "./components/FiberEngineeringPage";
 {/**
 import AboutPage from "./components/Aboutpage"; 
-import DataCenterPage from "./components/DataCenterPage";
 */}
+import DataCenterPage from "./components/DataCenterPage";
+
 import DroneTowerAuditPage from "./components/DroneTowerAuditPage";
 import ChipsetTestingPage from "./components/chipsetPage";
 
@@ -32,8 +33,9 @@ export function App() {
         <Route path="/fiberPage" element={<FiberEngineeringPage/>}/>
         {/**
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/dataCenterPage" element={<DataCenterPage/>}/>
         */}
+        <Route path="/dataCenterPage" element={<DataCenterPage/>}/>
+        
         <Route path="/droneTowerPage" element={<DroneTowerAuditPage/>}/>
         <Route path="/chipsetPage" element={<ChipsetTestingPage/>}/> 
         

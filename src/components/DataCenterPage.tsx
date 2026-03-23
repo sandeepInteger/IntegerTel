@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion";
 
 const spring: Transition = { duration: 0.6, ease: "easeOut" };
@@ -156,15 +157,28 @@ const DataCenterPage = () => {
         </div>
 
         {/* Breadcrumb */}
-        <div className="border-b border-white/[0.07]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 py-3.5 flex items-center gap-2 flex-wrap">
-            <span className="text-slate-300 text-sm font-semibold">Our Services</span>
-            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-slate-600">
-              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-slate-500 text-sm">Data Center Installation</span>
-          </div>
-        </div>
+        <nav aria-label="Breadcrumb" className="border-b border-white/[0.07]">
+          <ol className="max-w-7xl mx-auto px-6 sm:px-10 py-3.5 flex items-center gap-2 flex-wrap text-sm">
+            <li>
+              <Link
+                to="/services"
+                className="text-slate-300 font-semibold hover:text-white transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080f1e]"
+              >
+                Our Services
+              </Link>
+            </li>
+            <li className="flex items-center gap-2 text-slate-600" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </li>
+            <li>
+              <span className="text-slate-500" aria-current="page">
+                Data Center Installation
+              </span>
+            </li>
+          </ol>
+        </nav>
 
         {/* Hero content */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-16 sm:py-20 relative z-10">

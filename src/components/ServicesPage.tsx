@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, type Variants, type Transition } from "framer-motion";
 
 const spring: Transition = { duration: 0.6, ease: "easeOut" };
@@ -60,6 +61,7 @@ const services = [
   {
     tag: "RF & Network",
     title: "Wireless Services",
+    to: "/wirelessPage",
     description: "End-to-end RF design, optimization and testing across all wireless technologies — from legacy 4G LTE to full 5G NR deployment.",
     icon: WirelessIcon,
     bullets: ["5G NR & LTE site deployment", "RF drive testing & optimization", "Network performance analysis", "Interference resolution"],
@@ -71,6 +73,7 @@ const services = [
   {
     tag: "Infrastructure",
     title: "Fiber Engineering & Splicing",
+    to: "/fiberPage",
     description: "Complete fiber lifecycle management from permit coordination to final as-built documentation.",
     icon: FiberIcon,
     bullets: ["OSP/ISP fiber installation", "Fusion splicing & OTDR testing", "Conduit & duct bank design", "Permit & ROW coordination"],
@@ -82,6 +85,7 @@ const services = [
   {
     tag: "Hardware",
     title: "Data Center Infrastructure",
+    to: "/dataCenterPage",
     description: "Full mechanical and network build-outs for modern, high-density data centers — from cabling to commissioning.",
     icon: DataCenterIcon,
     bullets: ["Structured cabling systems", "Power & cooling infrastructure", "Rack installation & patching", "DCIM commissioning"],
@@ -93,6 +97,7 @@ const services = [
   {
     tag: "Field Services",
     title: "Tower Services",
+    to: "/droneTowerPage",
     description: "Antenna, radio & grounding upgrades with FAA Part 107-certified drone audits for safe, accurate inspections.",
     icon: TowerIcon,
     bullets: ["Antenna & RRU installations", "Grounding & bonding upgrades", "FAA 107 drone tower audits", "Structural load analysis support"],
@@ -104,6 +109,7 @@ const services = [
   {
     tag: "Testing",
     title: "Chipset & Device Testing",
+    to: "/chipsetPage",
     description: "Multi-region drive testing and advanced log analysis for next-gen mobile devices and chipset certification.",
     icon: ChipsetIcon,
     bullets: ["KPI drive testing & analysis", "Qualcomm/MediaTek log parsing", "Device certification support", "Multi-band RF performance"],
@@ -125,15 +131,16 @@ const ServiceCard = ({
 }) => {
   const Icon = service.icon;
   return (
-    <motion.div
-      variants={fadeUp}
-      onMouseEnter={() => onHover(index)}
-      onMouseLeave={() => onHover(null)}
-      className={`group relative bg-white border rounded-3xl p-7 flex flex-col gap-5 cursor-pointer transition-all duration-300 overflow-hidden
+    <motion.div variants={fadeUp} className="h-full min-h-0">
+      <Link
+        to={service.to}
+        onMouseEnter={() => onHover(index)}
+        onMouseLeave={() => onHover(null)}
+        className={`group relative bg-white border rounded-3xl p-7 flex flex-col gap-5 cursor-pointer transition-all duration-300 overflow-hidden h-full text-left no-underline outline-none ring-blue-500/40 focus-visible:ring-2 focus-visible:ring-offset-2
         ${active
           ? "border-blue-200 shadow-xl shadow-blue-100/60 -translate-y-1"
           : "border-slate-200 shadow-sm hover:border-blue-100 hover:shadow-md"}`}
-    >
+      >
       {/* Top accent bar */}
       <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${service.accent} transition-opacity duration-300 ${active ? "opacity-100" : "opacity-0"}`} />
       {/* Corner tint */}
@@ -168,12 +175,13 @@ const ServiceCard = ({
 
         {/* CTA */}
         <div className={`flex items-center gap-1.5 text-sm font-bold mt-auto transition-colors duration-200 ${active ? service.lightText : "text-slate-400"}`}>
-          Learn more
-          <motion.span animate={{ x: active ? 4 : 0 }} transition={{ duration: 0.2 }}>
+          <span className="text-inherit">Learn more</span>
+          <motion.span animate={{ x: active ? 4 : 0 }} transition={{ duration: 0.2 }} aria-hidden>
             <ArrowIcon />
           </motion.span>
         </div>
       </div>
+      </Link>
     </motion.div>
   );
 };
@@ -183,7 +191,7 @@ const ServicesPage = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
-    <div className="w-full py-20">
+    <div className="w-full ">
 
       {/* ══════════════════════════════════════════════════════════
           DARK HERO BANNER
@@ -211,10 +219,7 @@ const ServicesPage = () => {
         <div className="border-b border-white/[0.07]">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 py-3.5 flex items-center gap-2">
             <span className="text-slate-300 text-sm font-semibold">Our Services</span>
-            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-slate-600">
-              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-slate-500 text-sm">Telecom Engineering & Infrastructure</span>
+            
           </div>
         </div>
 

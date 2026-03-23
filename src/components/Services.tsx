@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
+import { Link } from "react-router-dom"
 import { motion, AnimatePresence, type Variants } from "framer-motion"
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ const SERVICES: ServiceItem[] = [
     gradient: "from-cyan-500 to-blue-600",
     accentFrom: "#06b6d4",
     accentTo: "#2563eb",
-    href: "/services/wireless-engineering",
+    href: "/services/wireless",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC-C1pEcNINttyDXMT4WKWhhkJUjasZuFqp67hXcxrBAvbAY8i9aReztLccLQha1-56_gJcvMmBcpfvh7bEx84nx2fjEbIMIw6nJH1p_ha_0M2mR8eDPRK07mmz_QWrzfWXPfLkH8DWqRk0NDlBzaEmj-mAdq7yvTmcyKCcfZI6rTPso7mwGZ8LWenAZq0IgbPx6WeugSnekfMxvldmxR5rpe9yhvmdxxAUUs5xNdlmhapSUavSk2ld6ydBrRk4z1s4f9ZqGMP2zgOA",
   },
   {
@@ -42,7 +43,7 @@ const SERVICES: ServiceItem[] = [
     gradient: "from-violet-500 to-purple-700",
     accentFrom: "#8b5cf6",
     accentTo: "#7e22ce",
-    href: "/services/fiber-engineering",
+    href: "/services/fiber",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC8oGrutpL9zl5vIPvEdOGLJt4Rb6vHxNfrb8wgDnMbWf2GhHRgL1CoUHy28FHJRwYacg2waT9CQ0g_W5JR7WLeev7n6Nz9r1JxNKZvLWQs5Ytw0r4-xqoC-c2uWZK4x2KbkEBCRGNRPEq572dN0rWgsEmkmZ7Qf-Cd6Nd_xotm_Qkunq58TuaLVYe9iRYQuwwVER9VxirSJF6JMoOVEVkg4dCuFlk-1dz3h9XE40duCSkyj4y1AsFZHT_rI8kNxJiBX7TtwZU9xMR3",
   },
   {
@@ -70,7 +71,7 @@ const SERVICES: ServiceItem[] = [
     gradient: "from-emerald-400 to-teal-600",
     accentFrom: "#34d399",
     accentTo: "#0d9488",
-    href: "/services/tower-installation",
+    href: "/services/tower",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCCtF6nvu1MTFXL2spDrv9WuU9nT3KHpgFyz0yF9GvzaUtNaSTHV2z-N6f9rmDg7_A9uteLBpqEMa9fKNR0IsCs88mQFJF5vMbwQDE_Q8OVdSorcUCH2-Oep1WJGoyfUsPokaq815rVYfQ-JR9Wht5RJiLowytsNXUmStOaTcfLerDsHWDkl0HOXXvY4vqawIbcb89r-OuXE9RbY-Pnr81B2UoJ4_blTlv-osv3mFI1ugLwN24Pt-WOAqEsmRDCCcAm-x3Lngk__G8r",
   },
   {
@@ -84,7 +85,7 @@ const SERVICES: ServiceItem[] = [
     gradient: "from-sky-400 to-indigo-600",
     accentFrom: "#38bdf8",
     accentTo: "#4f46e5",
-    href: "/services/device-testing",
+    href: "/services/chipset",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAKzdZGhK4EAXJcf6ef7UraELzIye6Mc-TNzJ8Bk-bJ-CDReydgNjJK8uzXRcHZQYzlSGoqEFC0l43KGcFKERr08T1Ti8spimLvqsDB03wkky2XvItBg1x6vA7mS3oyg7uLLLHMFIZj9mpDHChhK2oR4w7VfQEE0thjuZpbKc9YnrtTNMvYCno7F3hD17YSk6TxzGaP2AsRZUai2GhtWgxAVuzcT2UtwCVLTNHJ33R97C7-4hNVdipWpErKpmgJfBQxJilDj-p8h6VG",
   },
 ]
@@ -302,10 +303,10 @@ const Services = () => {
                   ))}
                 </ul>
 
-                {/* Read More link */}
-                <a
-                  href={svc.href}
-                  className="group inline-flex items-center gap-2 mt-2 text-sm font-semibold transition-all duration-200"
+                {/* Read More — client-side route to service detail */}
+                <Link
+                  to={svc.href}
+                  className="group inline-flex items-center gap-2 mt-2 text-sm font-semibold transition-all duration-200 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1f3c]"
                   style={{ color: svc.accentFrom }}
                 >
                   <span className="border-b border-transparent group-hover:border-current transition-colors duration-200">
@@ -314,10 +315,11 @@ const Services = () => {
                   <svg
                     className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                     fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={2}
+                    aria-hidden
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8h10M9 4l4 4-4 4" />
                   </svg>
-                </a>
+                </Link>
 
               </motion.div>
             </AnimatePresence>

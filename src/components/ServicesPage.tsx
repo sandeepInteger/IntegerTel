@@ -61,7 +61,7 @@ const services = [
   {
     tag: "RF & Network",
     title: "Wireless Services",
-    to: "/wirelessPage",
+    to: "/services/wireless",
     description: "End-to-end RF design, optimization and testing across all wireless technologies — from legacy 4G LTE to full 5G NR deployment.",
     icon: WirelessIcon,
     bullets: ["5G NR & LTE site deployment", "RF drive testing & optimization", "Network performance analysis", "Interference resolution"],
@@ -73,7 +73,7 @@ const services = [
   {
     tag: "Infrastructure",
     title: "Fiber Engineering & Splicing",
-    to: "/fiberPage",
+    to: "/services/fiber",
     description: "Complete fiber lifecycle management from permit coordination to final as-built documentation.",
     icon: FiberIcon,
     bullets: ["OSP/ISP fiber installation", "Fusion splicing & OTDR testing", "Conduit & duct bank design", "Permit & ROW coordination"],
@@ -85,7 +85,7 @@ const services = [
   {
     tag: "Hardware",
     title: "Data Center Infrastructure",
-    to: "/dataCenterPage",
+    to: "/services/data-center",
     description: "Full mechanical and network build-outs for modern, high-density data centers — from cabling to commissioning.",
     icon: DataCenterIcon,
     bullets: ["Structured cabling systems", "Power & cooling infrastructure", "Rack installation & patching", "DCIM commissioning"],
@@ -97,7 +97,7 @@ const services = [
   {
     tag: "Field Services",
     title: "Tower Services",
-    to: "/droneTowerPage",
+    to: "/services/tower",
     description: "Antenna, radio & grounding upgrades with FAA Part 107-certified drone audits for safe, accurate inspections.",
     icon: TowerIcon,
     bullets: ["Antenna & RRU installations", "Grounding & bonding upgrades", "FAA 107 drone tower audits", "Structural load analysis support"],
@@ -109,7 +109,7 @@ const services = [
   {
     tag: "Testing",
     title: "Chipset & Device Testing",
-    to: "/chipsetPage",
+    to: "/services/chipset",
     description: "Multi-region drive testing and advanced log analysis for next-gen mobile devices and chipset certification.",
     icon: ChipsetIcon,
     bullets: ["KPI drive testing & analysis", "Qualcomm/MediaTek log parsing", "Device certification support", "Multi-band RF performance"],

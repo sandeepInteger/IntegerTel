@@ -10,7 +10,7 @@ export const NAVBAR_OFFSET_TOP_CLASS = "pt-16 sm:pt-[70px]";
 const serviceItems = [
   {
     label: "Wireless Engineering",
-    href: "/wirelessPage",
+    href: "/services/wireless",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" />
@@ -19,7 +19,7 @@ const serviceItems = [
   },
   {
     label: "Fiber Engineering",
-    href: "/fiberPage",
+    href: "/services/fiber",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <path d="M3 12h4l3-9 4 18 3-9h4" />
@@ -28,7 +28,7 @@ const serviceItems = [
   },
   {
     label: "Data Centers",
-    href: "/dataCenterPage",
+    href: "/services/data-center",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <rect x="2" y="3" width="20" height="4" rx="1" />
@@ -42,7 +42,7 @@ const serviceItems = [
   },
   {
     label: "Tower Installation",
-    href: "/droneTowerPage",
+    href: "/services/tower",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <circle cx="12" cy="12" r="3" />
@@ -54,7 +54,7 @@ const serviceItems = [
   },
   {
     label: "Chipset & Testing",
-    href: "/chipsetPage",
+    href: "/services/chipset",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <rect x="7" y="7" width="10" height="10" rx="1.5" />

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import Navbar, { NAVBAR_OFFSET_TOP_CLASS } from "./components/Navbar";
@@ -29,17 +29,21 @@ export function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/services/wireless" element={<WirelessServicesPage />} />
+          <Route path="/services/fiber" element={<FiberEngineeringPage />} />
+          <Route path="/services/data-center" element={<DataCenterPage />} />
+          <Route path="/services/tower" element={<DroneTowerAuditPage />} />
+          <Route path="/services/chipset" element={<ChipsetTestingPage />} />
           <Route path="/services" element={<ServicesPage />} />
-
-          <Route path="/wirelessPage" element={<WirelessServicesPage />} />
-          <Route path="/fiberPage" element={<FiberEngineeringPage />} />
+          {/* Legacy URLs → new /services/* paths */}
+          <Route path="/wirelessPage" element={<Navigate to="/services/wireless" replace />} />
+          <Route path="/fiberPage" element={<Navigate to="/services/fiber" replace />} />
+          <Route path="/dataCenterPage" element={<Navigate to="/services/data-center" replace />} />
+          <Route path="/droneTowerPage" element={<Navigate to="/services/tower" replace />} />
+          <Route path="/chipsetPage" element={<Navigate to="/services/chipset" replace />} />
           {/**
         <Route path="/about" element={<AboutPage />} />
         */}
-          <Route path="/dataCenterPage" element={<DataCenterPage />} />
-
-          <Route path="/droneTowerPage" element={<DroneTowerAuditPage />} />
-          <Route path="/chipsetPage" element={<ChipsetTestingPage />} />
         </Routes>
       </main>
       <Footer />

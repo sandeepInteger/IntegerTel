@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useForm, ValidationError } from '@formspree/react';
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion";
 //import WorldMap from "./ui/world-map";
 //import WorldMap from "./ui/WorldMap";
@@ -71,10 +72,11 @@ const services = [
 // ── Field ─────────────────────────────────────────────────────────
 const Field = ({
   label, name, type = "text", placeholder, required = true,
-  as = "input", options,
+  as = "input", options, errors,
 }: {
   label: string; name: string; type?: string; placeholder?: string;
   required?: boolean; as?: "input" | "textarea" | "select"; options?: string[];
+  errors?: any;
 }) => {
   const [focused, setFocused] = useState(false);
   const base = "w-full bg-white border rounded-xl px-4 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-all duration-200";
@@ -86,20 +88,29 @@ const Field = ({
         {label}{required && <span className="text-blue-500 ml-0.5">*</span>}
       </label>
       {as === "textarea" ? (
-        <textarea name={name} placeholder={placeholder} rows={4} required={required}
-          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-          className={`${base} ${ring} py-3 resize-none`} />
+        <>
+          <textarea name={name} placeholder={placeholder} rows={4} required={required}
+            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+            className={`${base} ${ring} py-3 resize-none`} />
+          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
+        </>
       ) : as === "select" ? (
-        <select name={name} required={required}
-          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-          className={`${base} ${ring} h-11 cursor-pointer`}>
-          <option value="">Select a service…</option>
-          {options?.map((o) => <option key={o} value={o}>{o}</option>)}
-        </select>
+        <>
+          <select name={name} required={required}
+            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+            className={`${base} ${ring} h-11 cursor-pointer`}>
+            <option value="">Select a service…</option>
+            {options?.map((o) => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
+        </>
       ) : (
-        <input type={type} name={name} placeholder={placeholder} required={required}
-          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-          className={`${base} ${ring} h-11`} />
+        <>
+          <input type={type} name={name} placeholder={placeholder} required={required}
+            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+            className={`${base} ${ring} h-11`} />
+          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
+        </>
       )}
     </div>
   );
@@ -107,14 +118,7 @@ const Field = ({
 
 // ── Page ──────────────────────────────────────────────────────────
 const ContactPage = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading,   setLoading]   = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1600);
-  };
+  const [state, handleFormspreeSubmit] = useForm("mbdprqbk");
 
   return (
     <div className="min-h-screen w-full bg-[#f8faff] relative overflow-hidden">
@@ -272,7 +276,7 @@ const ContactPage = () => {
                 </p>
 
                 <AnimatePresence mode="wait">
-                  {submitted ? (
+                  {state.succeeded ? (
                     <motion.div key="success"
                       initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
                       className="flex flex-col items-center text-center gap-5 py-14">
@@ -287,32 +291,29 @@ const ContactPage = () => {
                           Thank you for reaching out. A member of our team will contact you shortly.
                         </p>
                       </div>
-                      <button onClick={() => setSubmitted(false)}
-                        className="text-blue-600 text-sm font-semibold hover:underline">
-                        Send another message →
-                      </button>
                     </motion.div>
                   ) : (
                     <motion.form key="form"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      onSubmit={handleSubmit} className="flex flex-col gap-4">
+                      onSubmit={handleFormspreeSubmit} className="flex flex-col gap-4">
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Field label="First Name" name="firstName" placeholder="John" />
-                        <Field label="Last Name"  name="lastName"  placeholder="Smith" />
+                        <Field label="First Name" name="firstName" placeholder="John" errors={state.errors} />
+                        <Field label="Last Name"  name="lastName"  placeholder="Smith" errors={state.errors} />
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Field label="Email" name="email" type="email" placeholder="john@company.com" />
-                        <Field label="Phone" name="phone" type="tel"   placeholder="+1 (555) 000-0000" required={false} />
+                        <Field label="Email" name="email" type="email" placeholder="john@company.com" errors={state.errors} />
+                        <Field label="Phone" name="phone" type="tel"   placeholder="+1 (555) 000-0000" required={false} errors={state.errors} />
                       </div>
-                      <Field label="Company" name="company" placeholder="Your company name" required={false} />
-                      <Field label="Service of Interest" name="service" as="select" options={services} />
+                      <Field label="Company" name="company" placeholder="Your company name" required={false} errors={state.errors} />
+                      <Field label="Service of Interest" name="service" as="select" options={services} errors={state.errors} />
                       <Field label="Project Details" name="message" as="textarea"
-                        placeholder="Tell us about your project, timeline, location, and any specific requirements…" />
+                        placeholder="Tell us about your project, timeline, location, and any specific requirements…"
+                        errors={state.errors} />
 
-                      <button type="submit" disabled={loading}
+                      <button type="submit" disabled={state.submitting}
                         className="mt-1 w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-300 text-white font-bold text-sm py-4 rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-400/40 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2">
-                        {loading ? (
+                        {state.submitting ? (
                           <>
                             <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />

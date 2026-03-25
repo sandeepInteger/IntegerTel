@@ -16,6 +16,7 @@ import DataCenterPage from "./components/DataCenterPage";
 
 import DroneTowerAuditPage from "./components/DroneTowerAuditPage";
 import ChipsetTestingPage from "./components/chipsetPage";
+import ProductsPage from "./components/ProductPage";
 
 
 
@@ -41,6 +42,8 @@ export function App() {
           <Route path="/dataCenterPage" element={<Navigate to="/services/data-center" replace />} />
           <Route path="/droneTowerPage" element={<Navigate to="/services/tower" replace />} />
           <Route path="/chipsetPage" element={<Navigate to="/services/chipset" replace />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/about" element={<Navigate to="/products" replace />} />
           {/**
         <Route path="/about" element={<AboutPage />} />
         */}

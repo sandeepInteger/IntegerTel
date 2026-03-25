@@ -65,9 +65,8 @@ const serviceItems = [
 ];
 
 const mainLinks = [
-  
-  
-  { label: "Contact",  to: "/contact"  },
+  { label: "Products", to: "/products" },
+  { label: "Contact", to: "/contact" },
 ];
 
 function ServicesDropdown() {

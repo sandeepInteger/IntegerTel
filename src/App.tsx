@@ -9,9 +9,9 @@ import ServicesPage from "./components/ServicesPage";
 
 import WirelessServicesPage from "./components/WirelessPage";
 import FiberEngineeringPage from "./components/FiberEngineeringPage";
-{/**
+
 import AboutPage from "./components/Aboutpage"; 
-*/}
+
 import DataCenterPage from "./components/DataCenterPage";
 
 import DroneTowerAuditPage from "./components/DroneTowerAuditPage";
@@ -43,10 +43,10 @@ export function App() {
           <Route path="/droneTowerPage" element={<Navigate to="/services/tower" replace />} />
           <Route path="/chipsetPage" element={<Navigate to="/services/chipset" replace />} />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/about" element={<Navigate to="/products" replace />} />
-          {/**
+          {/*<Route path="/about" element={<Navigate to="/products" replace />} />*/}
+        
         <Route path="/about" element={<AboutPage />} />
-        */}
+        
         </Routes>
       </main>
       <Footer />

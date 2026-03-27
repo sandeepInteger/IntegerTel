@@ -1,9 +1,14 @@
 "use client";
-import { useState } from "react";
-import { useForm, ValidationError } from '@formspree/react';
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion";
 //import WorldMap from "./ui/world-map";
 //import WorldMap from "./ui/WorldMap";
+
+// ── EmailJS credentials ───────────────────────────────────────────
+const EMAILJS_SERVICE_ID  = "service_v1b6lls";   // e.g. "service_abc123"
+const EMAILJS_TEMPLATE_ID = "template_2rfzhdg";  // e.g. "template_xyz789"
+const EMAILJS_PUBLIC_KEY  = "MCZ8NnHol75wlrdG2";   // e.g. "pk_xxxxxxxxxxxxxxx"
 
 const spring: Transition = { duration: 0.6, ease: "easeOut" };
 const fadeUp: Variants = {
@@ -55,11 +60,6 @@ const offices = [
   },
 ];
 
-{/**const mapDots = offices.slice(1).map((o) => ({
-  start: { lat: offices[0].lat, lng: offices[0].lng },
-  end:   { lat: o.lat,          lng: o.lng          },
-})); */}
-
 const services = [
   "Wireless Engineering & Field Services",
   "Fiber Engineering & Splicing",
@@ -72,11 +72,10 @@ const services = [
 // ── Field ─────────────────────────────────────────────────────────
 const Field = ({
   label, name, type = "text", placeholder, required = true,
-  as = "input", options, errors,
+  as = "input", options,
 }: {
   label: string; name: string; type?: string; placeholder?: string;
   required?: boolean; as?: "input" | "textarea" | "select"; options?: string[];
-  errors?: any;
 }) => {
   const [focused, setFocused] = useState(false);
   const base = "w-full bg-white border rounded-xl px-4 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-all duration-200";
@@ -88,29 +87,20 @@ const Field = ({
         {label}{required && <span className="text-blue-500 ml-0.5">*</span>}
       </label>
       {as === "textarea" ? (
-        <>
-          <textarea name={name} placeholder={placeholder} rows={4} required={required}
-            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-            className={`${base} ${ring} py-3 resize-none`} />
-          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
-        </>
+        <textarea name={name} placeholder={placeholder} rows={4} required={required}
+          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+          className={`${base} ${ring} py-3 resize-none`} />
       ) : as === "select" ? (
-        <>
-          <select name={name} required={required}
-            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-            className={`${base} ${ring} h-11 cursor-pointer`}>
-            <option value="">Select a service…</option>
-            {options?.map((o) => <option key={o} value={o}>{o}</option>)}
-          </select>
-          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
-        </>
+        <select name={name} required={required}
+          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+          className={`${base} ${ring} h-11 cursor-pointer`}>
+          <option value="">Select a service…</option>
+          {options?.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
       ) : (
-        <>
-          <input type={type} name={name} placeholder={placeholder} required={required}
-            onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-            className={`${base} ${ring} h-11`} />
-          <ValidationError prefix={label} field={name} errors={errors} className="text-xs text-red-500 mt-0.5" />
-        </>
+        <input type={type} name={name} placeholder={placeholder} required={required}
+          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+          className={`${base} ${ring} h-11`} />
       )}
     </div>
   );
@@ -118,7 +108,33 @@ const Field = ({
 
 // ── Page ──────────────────────────────────────────────────────────
 const ContactPage = () => {
-  const [state, handleFormspreeSubmit] = useForm("mbdprqbk");
+  const formRef = useRef<HTMLFormElement>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [succeeded, setSucceeded] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setSubmitting(true);
+    setErrorMsg(null);
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY,
+      );
+      setSucceeded(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setErrorMsg("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-[#f8faff] relative overflow-hidden">
@@ -185,12 +201,10 @@ const ContactPage = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm relative"
           >
-            {/* Subtle top-right tint */}
             <div className="absolute top-0 right-0 w-64 h-48 bg-gradient-to-bl from-blue-50 to-transparent rounded-bl-[80px] pointer-events-none" />
 
             <div className="relative z-10 p-8 flex flex-col gap-7">
 
-              {/* Card header */}
               <div>
                 <span className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-3">
                   <span className="w-1 h-1 rounded-full bg-blue-500" />
@@ -205,7 +219,6 @@ const ContactPage = () => {
                 </p>
               </div>
 
-              {/* World map — light bg */}
               <div className="relative w-full rounded-2xl overflow-hidden bg-[#f0f6ff]">
                 <div className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
                   style={{ background: `radial-gradient(ellipse at center, transparent 40%, #f0f6ff 78%)` }} />
@@ -220,7 +233,6 @@ const ContactPage = () => {
                 /> */}
               </div>
 
-              {/* Office cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {offices.map(({ city, country, flag, addr, dot }) => (
                   <div key={city}
@@ -240,7 +252,6 @@ const ContactPage = () => {
                 ))}
               </div>
 
-              {/* Stats */}
               <div className="grid grid-cols-3 gap-4 pt-5 border-t border-slate-100">
                 {[
                   { v: "30+",  l: "US States"  },
@@ -276,7 +287,7 @@ const ContactPage = () => {
                 </p>
 
                 <AnimatePresence mode="wait">
-                  {state.succeeded ? (
+                  {succeeded ? (
                     <motion.div key="success"
                       initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
                       className="flex flex-col items-center text-center gap-5 py-14">
@@ -293,27 +304,36 @@ const ContactPage = () => {
                       </div>
                     </motion.div>
                   ) : (
-                    <motion.form key="form"
+                    <motion.form
+                      key="form"
+                      ref={formRef}
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      onSubmit={handleFormspreeSubmit} className="flex flex-col gap-4">
-
+                      onSubmit={handleSubmit}
+                      className="flex flex-col gap-4"
+                    >
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Field label="First Name" name="firstName" placeholder="John" errors={state.errors} />
-                        <Field label="Last Name"  name="lastName"  placeholder="Smith" errors={state.errors} />
+                        <Field label="First Name" name="firstName" placeholder="John" />
+                        <Field label="Last Name"  name="lastName"  placeholder="Smith" />
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Field label="Email" name="email" type="email" placeholder="john@company.com" errors={state.errors} />
-                        <Field label="Phone" name="phone" type="tel"   placeholder="+1 (555) 000-0000" required={false} errors={state.errors} />
+                        <Field label="Email" name="email" type="email" placeholder="john@company.com" />
+                        <Field label="Phone" name="phone" type="tel"   placeholder="+1 (555) 000-0000" required={false} />
                       </div>
-                      <Field label="Company" name="company" placeholder="Your company name" required={false} errors={state.errors} />
-                      <Field label="Service of Interest" name="service" as="select" options={services} errors={state.errors} />
+                      <Field label="Company" name="company" placeholder="Your company name" required={false} />
+                      <Field label="Service of Interest" name="service" as="select" options={services} />
                       <Field label="Project Details" name="message" as="textarea"
-                        placeholder="Tell us about your project, timeline, location, and any specific requirements…"
-                        errors={state.errors} />
+                        placeholder="Tell us about your project, timeline, location, and any specific requirements…" />
 
-                      <button type="submit" disabled={state.submitting}
+                      {/* Error message */}
+                      {errorMsg && (
+                        <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                          {errorMsg}
+                        </p>
+                      )}
+
+                      <button type="submit" disabled={submitting}
                         className="mt-1 w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-300 text-white font-bold text-sm py-4 rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-400/40 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2">
-                        {state.submitting ? (
+                        {submitting ? (
                           <>
                             <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />

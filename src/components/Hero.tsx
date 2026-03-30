@@ -16,7 +16,13 @@ const fadeIn = (delay = 0) => ({
   transition: { duration: 0.6, delay },
 })
 
-
+/* ── Stats data ──────────────────────────────────────────────────────────── */
+const STATS = [
+  { value: "30+",  label: "U.S. States"       },
+  { value: "600+", label: "Field Experts"      },
+  { value: "5",    label: "Service Verticals"  },
+  { value: "15+",  label: "Years of Expertise" },
+]
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 const Hero = () => {
@@ -173,39 +179,7 @@ const Hero = () => {
             </button>
           </motion.div>
 
-          {/* ── Stats row ──────────────────────────────────────────────────── */}
-          {/**<motion.div {...fadeUp(0.46)}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            {STATS.map(({ value, label }, i) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="stat-card flex flex-col gap-0.5 px-4 py-3.5 rounded-2xl"
-                style={{
-                  background: "rgba(255,255,255,0.82)",
-                  border: "1px solid rgba(15,23,42,0.08)",
-                  boxShadow: "0 2px 12px rgba(15,23,42,0.05)",
-                  backdropFilter: "blur(12px)",
-                }}
-              >
-                <span
-                  className="hero-serif text-2xl font-bold leading-none"
-                  style={{
-                    background: "linear-gradient(135deg, #1d4ed8, #6366f1)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  {value}
-                </span>
-                <span className="hero-sans text-[11.5px] text-slate-500 font-medium leading-tight mt-1">
-                  {label}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div> */}
+          
 
         </div>
 
@@ -229,29 +203,90 @@ const Hero = () => {
             <Globe />
           </div>
 
-          {/* Floating stat chips around globe */}
-          {[
-            { label: "United States", flag: "🇺🇸", pos: "bottom-[22%] left-[2%]", delay: 1.0  },
-            { label: "India",         flag: "🇮🇳", pos: "top-[28%] right-[0%]",  delay: 0.85 },
-            { label: "Canada",        flag: "🇨🇦", pos: "top-[10%] left-[2%]",   delay: 0.7 },
-          ].map(({ label, flag, pos, delay }) => (
+          {/* Domain service chips — telecom verticals */}
+          {([
+            {
+              label: "5G & Wireless",
+              accent: "#2563eb",
+              pos: "top-[6%] left-[-2%]",
+              delay: 0.7,
+              icon: (
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                  <path d="M3 13 L5 4 M13 13 L11 4 M5 4 Q8 9 11 4 M6 8 Q8 11 10 8"
+                    stroke="#2563eb" strokeWidth="1.4" strokeLinecap="round"/>
+                </svg>
+              ),
+            },
+            {
+              label: "Fiber Splicing",
+              accent: "#6366f1",
+              pos: "top-[38%] right-[-4%]",
+              delay: 0.85,
+              icon: (
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                  <path d="M2 8h3l2-5 3 10 2-5h2" stroke="#6366f1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              ),
+            },
+            {
+              label: "Chipset Testing",
+              accent: "#06b6d4",
+              pos: "bottom-[24%] right-[-6%]",
+              delay: 1.0,
+              icon: (
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                  <rect x="3" y="3" width="10" height="10" rx="1" stroke="#06b6d4" strokeWidth="1.3"/>
+                  <circle cx="8" cy="8" r="2" stroke="#06b6d4" strokeWidth="1.2"/>
+                  <path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2" stroke="#06b6d4" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
+              ),
+            },
+            {
+              label: "Tower Install",
+              accent: "#10b981",
+              pos: "bottom-[8%] left-[-2%]",
+              delay: 1.15,
+              icon: (
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                  <path d="M8 2v9M5 5l3-3 3 3" stroke="#10b981" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="3" y="11" width="10" height="3" rx="0.8" stroke="#10b981" strokeWidth="1.2"/>
+                </svg>
+              ),
+            },
+            {
+              label: "Data Center",
+              accent: "#f59e0b",
+              pos: "top-[70%] left-[-5%]",
+              delay: 1.3,
+              icon: (
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0">
+                  <rect x="2" y="3" width="12" height="4" rx="0.8" stroke="#f59e0b" strokeWidth="1.3"/>
+                  <rect x="2" y="9" width="12" height="4" rx="0.8" stroke="#f59e0b" strokeWidth="1.3"/>
+                  <circle cx="12" cy="5" r="0.8" fill="#f59e0b"/>
+                  <circle cx="12" cy="11" r="0.8" fill="#f59e0b"/>
+                </svg>
+              ),
+            },
+          ] as const).map(({ label, accent, pos, delay, icon }) => (
             <motion.div
               key={label}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.82, y: 6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.5, delay, ease: "easeOut" }}
-              className={`absolute ${pos} hidden sm:flex items-center gap-2 z-10
-                          px-3 py-1.5 rounded-full text-[12px] font-semibold text-slate-700 whitespace-nowrap`}
+              className={`absolute ${pos} hidden lg:flex items-center gap-2 z-10
+                          px-3 py-1.5 rounded-full text-[11.5px] font-semibold whitespace-nowrap`}
               style={{
-                background: "rgba(255,255,255,0.90)",
-                border: "1px solid rgba(15,23,42,0.09)",
-                boxShadow: "0 4px 16px rgba(15,23,42,0.08)",
+                background:     "rgba(255,255,255,0.93)",
+                border:         `1px solid ${accent}35`,
+                boxShadow:      `0 4px 16px ${accent}20, 0 1px 0 rgba(255,255,255,0.9) inset`,
                 backdropFilter: "blur(10px)",
+                color:          "#0f172a",
+                fontFamily:     "'DM Sans', system-ui, sans-serif",
               }}
             >
-              <span>{flag}</span>
+              {icon}
               {label}
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
             </motion.div>
           ))}
         </motion.div>
